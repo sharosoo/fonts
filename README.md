@@ -15,10 +15,10 @@ All three in use: [specimen PDF](docs/specimen/typography-specimen.pdf).
 - One directory per font, `packages/<name>/`. Build settings live in `font.toml`; source fonts sit in `upstream/` with origin and SHA-256 in `UPSTREAM.md`.
 - Outputs: desktop TTF, Kobo (`kf`), CrossPoint (`cpfont`) and web (woff2 + CSS split by `unicode-range`). Jeongdok Display ships TTF and web only.
 - Releases: pushing a tag `<name>-v<version>` (e.g. `jeongdok-v0.1.0`) makes GitHub Actions build the font and attach the zips to GitHub Releases. Each font is versioned and released on its own.
-- Web fonts are committed under `packages/<name>/dist/web` and served by jsDelivr from the tag:
+- Web fonts are not committed. The release workflow builds `packages/<name>/dist/web/static` and uploads it to `cdn.sharosoo.com`; each URL becomes available once `<name>-v<version>` is released:
 
   ```
-  https://cdn.jsdelivr.net/gh/sharosoo/fonts@<name>-v<version>/packages/<name>/dist/web/static/<name>-dynamic-subset.css
+  https://cdn.sharosoo.com/fonts/<name>/v<version>/<name>-dynamic-subset.css
   ```
 
 ## Build

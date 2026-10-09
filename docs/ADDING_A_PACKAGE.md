@@ -5,7 +5,7 @@
 3. Do not use an upstream Reserved Font Name (declared in its `OFL.txt`, for example Libron, D2Coding) or an upstream trademark (for example Newsreader, RIDIBatang) in the font's names. List them in `CREDITS.md` and the `font.toml` copyright.
 4. Write `font.toml` (keys below). Tune Hangul `scale` and `dy` by eye and record the reasoning in `docs/DESIGN.md`.
 5. Build and check: `uv run scripts/build.py <name>`, then `uv run scripts/qa.py <name>`.
-6. Release: make `VERSION` equal `[family] version` in `font.toml`, then `uv run scripts/release.py <name>`. It writes the zips and `SHA256SUMS` to `dist/release/` and prints the publish commands; `--publish` runs them (commit, tag `<name>-v<version>`, push, `gh release create`).
+6. Release: make `VERSION` equal `[family] version` in `font.toml`, then `uv run scripts/release.py <name>`. It writes the zips and `SHA256SUMS` to `dist/release/` and prints the publish commands; `--publish` runs them (commit, tag `<name>-v<version>`, push, `gh release create`). The tag push also makes CI upload `dist/web/static` to `https://cdn.sharosoo.com/fonts/<name>/v<version>/`; web fonts are not committed.
 
 A package that is neither `graft` nor `nerd-patch` needs a new entry in `KINDS` in `scripts/build.py` (target order and build functions; graft targets live in `TARGETS` in `scripts/lib/targets.py`).
 

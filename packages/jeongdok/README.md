@@ -9,17 +9,17 @@ Body serif for E Ink reading of mixed Hangul and Latin text: [Libron](https://gi
 | Desktop, Kindle, other e-readers | `Jeongdok-<version>-desktop.zip` (4 TTF) | GitHub Releases |
 | Kobo (kepub) | `Jeongdok-<version>-kobo.zip` (`KF_Jeongdok-*.ttf`) | GitHub Releases |
 | Xteink X3/X4 (CrossPoint) | `Jeongdok-<version>-crosspoint.zip`; copy to `/fonts/Jeongdok/` on the SD card | GitHub Releases |
-| Web | CDN below, or `Jeongdok-<version>-web.zip` | jsDelivr / Releases |
+| Web | CDN below, or `Jeongdok-<version>-web.zip` | cdn.sharosoo.com / Releases |
 
 ## Web
 
 ```html
 <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/sharosoo/fonts@jeongdok-v0.1.0/packages/jeongdok/dist/web/static/jeongdok-dynamic-subset.css">
+  href="https://cdn.sharosoo.com/fonts/jeongdok/v0.1.0/jeongdok-dynamic-subset.css">
 <style> body { font-family: 'Jeongdok', serif; } </style>
 ```
 
-Use `@main` instead of the tag until the tag exists.
+The URL is available once `jeongdok-v0.1.0` is released; the `v0.1.0` path is immutable.
 
 | CSS | Content |
 |---|---|
@@ -45,7 +45,7 @@ uv run scripts/build.py jeongdok      # ttf -> kf -> cpfont -> web
 uv run scripts/qa.py jeongdok         # names, glyph counts, ink balance
 ```
 
-Output: `dist/eink/{ttf,kf,cpfont}` (not committed; attached to Releases) and `dist/web/static` (committed; served by jsDelivr).
+Output: `dist/eink/{ttf,kf,cpfont}` (not committed; attached to Releases) and `dist/web/static` (not committed; uploaded to cdn.sharosoo.com on release).
 
 Demo: `python3 -m http.server 8791` at the repo root, then open `/packages/jeongdok/demo/`.
 

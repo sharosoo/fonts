@@ -23,7 +23,7 @@ References: `references/nerd-patch.md` (Nerd patching, web icon split), `referen
 - One monorepo, `packages/<name>/`. `font.toml` has `kind = "graft" | "nerd-patch"`; `scripts/build.py` dispatches on it. `targets` limits builds (a heading face skips `kf`/`cpfont`).
 - uv project (`pyproject.toml`, `uv.lock`, `.python-version`): `uv sync`, then `uv run scripts/build.py|qa.py|release.py <pkg>`. No hand-made venvs or requirements.txt. Code must run on the declared minimum Python (no nested same-type quotes in f-strings).
 - `build.py` sets `SOURCE_DATE_EPOCH`, so `head.modified` is fixed and two builds give byte-identical woff2. Hash `dist/web` after two builds to confirm.
-- E-reader/desktop fonts ship as GitHub Release assets (`dist/eink` is gitignored). Web fonts are committed under `dist/web` and served by jsDelivr from tag `<pkg>-v<ver>`.
+- E-reader/desktop fonts ship as GitHub Release assets (`dist/eink` is gitignored). Web fonts (`dist/web`, gitignored) are built in CI and uploaded to `https://cdn.sharosoo.com/fonts/<pkg>/v<ver>/` when tag `<pkg>-v<ver>` is pushed.
 - Upstream sources are pinned by URL + sha256 (`upstream/UPSTREAM.md`). Small OFL files are committed; large ones use `[[fetch]]` (plain file or zip `member`, optional `member_sha256`). Prefer the foundry's own download (Maru Buri: NAVER zip).
 - `font.toml` knobs: `[family] slug` (CSS/file names without spaces), `ps_name` (no spaces; names release zips), `[qa] banned` (upstream names that must not survive in the name table), `[hangul.files]` (donor per style), `[latin.variable]` + `[latin.axes]` (variable Latin master instantiated per style).
 - Commit locally; push, tag and publish only on explicit request.

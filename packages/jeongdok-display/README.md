@@ -7,7 +7,7 @@ Heading and brand cut of [Jeongdok](../jeongdok): Newsreader at its Display opti
 | Target | File | Where |
 |---|---|---|
 | Desktop | `JeongdokDisplay-<version>-desktop.zip` (4 TTF) | GitHub Releases |
-| Web | CDN below, or `JeongdokDisplay-<version>-web.zip` | jsDelivr / Releases |
+| Web | CDN below, or `JeongdokDisplay-<version>-web.zip` | cdn.sharosoo.com / Releases |
 
 No Kobo or CrossPoint builds.
 
@@ -15,11 +15,11 @@ No Kobo or CrossPoint builds.
 
 ```html
 <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/sharosoo/fonts@jeongdok-display-v0.1.0/packages/jeongdok-display/dist/web/static/jeongdok-display-dynamic-subset.css">
+  href="https://cdn.sharosoo.com/fonts/jeongdok-display/v0.1.0/jeongdok-display-dynamic-subset.css">
 <style> h1, h2 { font-family: 'Jeongdok Display', 'Jeongdok', serif; } </style>
 ```
 
-Use `@main` instead of the tag until the tag exists.
+The URL is available once `jeongdok-display-v0.1.0` is released; the `v0.1.0` path is immutable.
 
 | CSS | Content |
 |---|---|

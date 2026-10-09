@@ -30,13 +30,13 @@ metadata:
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sharosoo/fonts@jeongdok-v0.1.0/packages/jeongdok/dist/web/static/jeongdok-dynamic-subset.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sharosoo/fonts@jeongdok-display-v0.1.0/packages/jeongdok-display/dist/web/static/jeongdok-display-dynamic-subset.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sharosoo/fonts@d2koding-v1.4.0/packages/d2koding/dist/web/static/d2koding-dynamic-subset.css">
+<link rel="stylesheet" href="https://cdn.sharosoo.com/fonts/jeongdok/v0.1.0/jeongdok-dynamic-subset.css">
+<link rel="stylesheet" href="https://cdn.sharosoo.com/fonts/jeongdok-display/v0.1.0/jeongdok-display-dynamic-subset.css">
+<link rel="stylesheet" href="https://cdn.sharosoo.com/fonts/d2koding/v1.4.0/d2koding-dynamic-subset.css">
 ```
 
 - Each CSS is a dynamic subset: Hangul is split by `unicode-range`, so the browser downloads only the slices a page uses. `font-display: swap` is set.
-- `@<name>-v<version>` in the CDN URL is the release tag. If the tag does not exist yet, use `@main`.
+- CDN URLs have the form `https://cdn.sharosoo.com/fonts/<name>/v<version>/…` and are available once the tag `<name>-v<version>` is released. A version path is immutable.
 
 ## Tokens and base styles
 

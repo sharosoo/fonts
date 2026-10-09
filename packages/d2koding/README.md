@@ -9,7 +9,7 @@ NAVER [D2Coding](https://github.com/naver/d2codingfont) patched with [Nerd Fonts
 | Target | File | Where |
 |---|---|---|
 | Terminals, editors | `D2Koding-<version>-nerd.zip`: `mono/` and `default/`, each with 4 TTF (2 families × Regular, Bold) | GitHub Releases |
-| Web | CDN below, or `D2Koding-<version>-web.zip` | jsDelivr / Releases |
+| Web | CDN below, or `D2Koding-<version>-web.zip` | cdn.sharosoo.com / Releases |
 
 ## Families
 
@@ -26,14 +26,14 @@ Terminal example: `font-family = D2KodingLigature Nerd Font Mono`. Hangul is 2 c
 
 ```html
 <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/sharosoo/fonts@d2koding-v1.4.0/packages/d2koding/dist/web/static/d2koding-dynamic-subset.css">
+  href="https://cdn.sharosoo.com/fonts/d2koding/v1.4.0/d2koding-dynamic-subset.css">
 <style>
   pre, code { font-family: 'D2Koding', monospace; }
   .no-ligature { font-variant-ligatures: none; }   /* web files are the ligature build only */
 </style>
 ```
 
-Use `@main` instead of the tag until the tag exists.
+The URL is available once `d2koding-v1.4.0` is released; the `v1.4.0` path is immutable.
 
 | CSS | Content |
 |---|---|
