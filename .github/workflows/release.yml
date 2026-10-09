@@ -1,0 +1,39 @@
+name: Release font
+
+# Tag format: <package>-v<version>, e.g. jeongdok-v0.1.0
+# Web fonts (dist/web) are committed before tagging so jsDelivr serves them from the tag.
+# This workflow builds the e-reader / desktop assets and attaches them to the GitHub Release.
+on:
+  push:
+    tags: ["*-v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Resolve package from tag
+        run: echo "PKG=${GITHUB_REF_NAME%-v*}" >> "$GITHUB_ENV"
+      - name: Install
+        run: |
+          uv sync --frozen
+          uv run scripts/fetch_tools.py
+      - name: Build
+        run: uv run scripts/build.py "$PKG"
+      - name: QA
+        run: uv run scripts/qa.py "$PKG"
+      - name: Package
+        run: uv run scripts/release.py "$PKG"
+      - name: Publish release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            packages/${{ env.PKG }}/dist/release/*.zip
+            packages/${{ env.PKG }}/dist/release/SHA256SUMS
+          body_path: packages/${{ env.PKG }}/dist/release/NOTES.md
