@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>sharosoo type system · specimen</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../../packages/jeongdok/dist/web/static/jeongdok-dynamic-subset.css">
+<link rel="stylesheet" href="../../packages/jeongdok-display/dist/web/static/jeongdok-display-dynamic-subset.css">
+<link rel="stylesheet" href="../../packages/d2koding/dist/web/static/d2koding-dynamic-subset.css">
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --font-sans: 'IBM Plex Sans KR', system-ui, sans-serif;
+    --font-serif: 'Jeongdok', 'Noto Serif KR', serif;
+    --font-display: 'Jeongdok Display', 'Jeongdok', serif;
+    --font-mono: 'D2Koding', ui-monospace, monospace;
+    --ink: #1b1a17; --muted: #6b675e; --paper: #faf8f3; --rule: #d9d4c7; --accent: #8a3b1f;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #888; color: var(--ink); font-family: var(--font-serif); }
+  .page { width: 210mm; height: 297mm; margin: 0 auto 8mm; background: var(--paper); padding: 18mm 18mm 16mm; position: relative; overflow: hidden; break-after: page; page-break-after: always; }
+  @media print { body { background: none; } .page { margin: 0; } }
+  .sans { font-family: var(--font-sans); } .disp { font-family: var(--font-display); } .mono { font-family: var(--font-mono); }
+  .kicker { font: 500 8.5pt/1 var(--font-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 4mm; }
+  .foot { position: absolute; left: 18mm; right: 18mm; bottom: 9mm; display: flex; justify-content: space-between; font: 400 7.5pt/1 var(--font-sans); color: var(--muted); border-top: .3mm solid var(--rule); padding-top: 2.5mm; }
+  h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 400; }
+  h2 { font-size: 26pt; line-height: 1.15; margin-bottom: 3mm; }
+  h3 { font: 700 9pt/1.2 var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 7mm 0 2.5mm; }
+  p { margin: 0 0 3mm; font-size: 10.5pt; line-height: 1.75; word-break: keep-all; overflow-wrap: break-word; }
+  .lead { font-size: 12.5pt; line-height: 1.7; color: #3b382f; }
+  .small { font: 400 8.5pt/1.55 var(--font-sans); color: var(--muted); }
+  .rule { border: 0; border-top: .3mm solid var(--rule); margin: 5mm 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+  .cell { border-top: .3mm solid var(--ink); padding-top: 2.5mm; }
+  .cell b { font: 700 9pt/1.4 var(--font-sans); } .cell span { font: 400 8.5pt/1.5 var(--font-sans); color: var(--muted); display: block; }
+  .row { display: grid; grid-template-columns: 24mm 1fr; gap: 4mm; align-items: baseline; padding: 2.2mm 0; border-bottom: .2mm solid var(--rule); }
+  .row .tag { font: 400 7.5pt/1.2 var(--font-sans); color: var(--muted); }
+  pre { margin: 0; font: 400 9.2pt/1.55 var(--font-mono); background: #1f2026; color: #d9dce3; padding: 4.5mm 5mm; border-radius: 1.6mm; white-space: pre-wrap; tab-size: 4; }
+  pre .c { color: #7f8696; } pre .k { color: #e5a26c; } pre .s { color: #9fcf8a; }
+  .btn { display: inline-block; font: 500 9.5pt/1 var(--font-sans); padding: 2.4mm 4.5mm; border-radius: 1.4mm; background: var(--ink); color: #fff; margin-right: 2mm; }
+  .btn.ghost { background: transparent; color: var(--ink); border: .3mm solid var(--ink); }
+  table { border-collapse: collapse; width: 100%; font: 400 9pt/1.4 var(--font-sans); } td, th { text-align: left; padding: 2mm 2.5mm; border-bottom: .2mm solid var(--rule); } th { font-weight: 700; color: var(--muted); font-size: 8pt; letter-spacing: .05em; text-transform: uppercase; }
+  td.n { font-variant-numeric: tabular-nums; text-align: right; }
+  .gl { font-size: 17pt; line-height: 1.5; letter-spacing: .02em; word-break: break-all; }
+</style>
+</head>
+<body>
+
+<!-- 1 · cover -->
+<section class="page" style="display:flex;flex-direction:column;justify-content:space-between">
+  <div>
+    <div class="kicker">sharosoo / fonts · type system 0.1</div>
+    <h1 style="font-size:64pt;line-height:1.05;margin-top:30mm;letter-spacing:-.01em">정독의 시간<br><i>Reading Slowly</i></h1>
+    <p class="lead disp" style="margin-top:8mm;max-width:130mm">{{cover_lead}}</p>
+  </div>
+  <div class="cols" style="gap:6mm">
+    <div class="cell"><b>Jeongdok</b><span>{{cover_c1}}</span></div>
+    <div class="cell"><b>Jeongdok Display</b><span>{{cover_c2}}</span></div>
+    <div class="cell"><b>IBM Plex Sans KR</b><span>{{cover_c3}}</span></div>
+    <div class="cell"><b>D2Koding</b><span>{{cover_c4}}</span></div>
+  </div>
+  <div class="foot"><span>Fonts: SIL OFL 1.1</span><span>github.com/sharosoo/fonts</span></div>
+</section>
+
+<!-- 2 · roles -->
+<section class="page">
+  <div class="kicker">01 · Roles</div>
+  <h2>{{roles_h2}}</h2>
+  <p class="lead">{{roles_lead}}</p>
+  <hr class="rule">
+  <div class="row"><div class="tag">TITLE</div><div class="disp" style="font-size:30pt;line-height:1.2">{{ko_slow_books}} <i>Slow Books</i></div></div>
+  <div class="row"><div class="tag">BODY</div><div style="font-size:12pt;line-height:1.7">{{roles_body}} The harbor was quiet that morning.</div></div>
+  <div class="row"><div class="tag">UI</div><div class="sans" style="font-size:11pt;line-height:1.6"><span class="btn">{{btn_save}}</span><span class="btn ghost">{{btn_cancel}}</span> &nbsp; {{roles_meta}}</div></div>
+  <div class="row"><div class="tag">CODE</div><div class="mono" style="font-size:10.5pt">git commit -m "feat: {{commit_ko}}" <span style="opacity:.6"># -&gt; != &gt;=</span></div></div>
+  <h3>{{roles_h3_tokens}}</h3>
+<pre><span class="c">/* {{css_comment}} */</span>
+:root {
+  --font-sans:    'IBM Plex Sans KR', system-ui, sans-serif;
+  --font-serif:   'Jeongdok', 'Noto Serif KR', serif;
+  --font-display: 'Jeongdok Display', 'Jeongdok', serif;
+  --font-mono:    'D2Koding', ui-monospace, monospace;
+}</pre>
+  <h3>{{roles_h3_why}}</h3>
+  <p class="small">{{roles_why}}</p>
+  <div class="foot"><span>01 Roles</span><span>sharosoo type system</span></div>
+</section>
+
+<!-- 3 · Jeongdok -->
+<section class="page">
+  <div class="kicker">{{jd_kicker}}</div>
+  <h2>정독 <i style="font-size:.7em;color:var(--muted)">Jeongdok</i></h2>
+  <p class="lead">{{jd_lead}}</p>
+  <h3>{{jd_h3_body}}</h3>
+  <p style="font-size:11.5pt;line-height:1.8">{{jd_body}}</p>
+  <h3>{{jd_h3_styles}}</h3>
+  <div class="row"><div class="tag">Regular</div><div style="font-size:15pt">Hxg 가한글 xHp 꿈gx — {{quiet_reading}}</div></div>
+  <div class="row"><div class="tag">Italic</div><div style="font-size:15pt;font-style:italic">Hxg 가한글 xHp 꿈gx — Quiet Morning</div></div>
+  <div class="row"><div class="tag">Bold</div><div style="font-size:15pt;font-weight:700">Hxg 가한글 xHp 꿈gx — {{quiet_reading}}</div></div>
+  <div class="row"><div class="tag">Bold Italic</div><div style="font-size:15pt;font-weight:700;font-style:italic">Hxg 가한글 xHp 꿈gx — Quiet Morning</div></div>
+  <h3>{{jd_h3_sizes}}</h3>
+  <div class="row"><div class="tag">9 pt</div><div style="font-size:9pt;line-height:1.6">The quick brown fox jumps over a lazy dog. 다람쥐 헌 쳇바퀴에 타고파. 0123456789</div></div>
+  <div class="row"><div class="tag">12 pt</div><div style="font-size:12pt;line-height:1.6">The quick brown fox jumps over a lazy dog. 다람쥐 헌 쳇바퀴에 타고파.</div></div>
+  <div class="row"><div class="tag">18 pt</div><div style="font-size:18pt;line-height:1.5">The quick brown fox. 다람쥐 헌 쳇바퀴에.</div></div>
+  <h3>{{jd_h3_glyphs}}</h3>
+  <div class="gl">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &amp;?!“”‘’ 가나다라마바사아자차카타파하 값 깎 닭 읊 뷁 똘 꿰뚫다</div>
+  <div class="foot"><span>02 Jeongdok</span><span>Libron 0.24 + RIDIBatang · OFL</span></div>
+</section>
+
+<!-- 4 · Display -->
+<section class="page">
+  <div class="kicker">{{dp_kicker}}</div>
+  <h2 style="font-size:46pt;line-height:1.1;margin-bottom:5mm">정독의 시간<br>Reading Slowly</h2>
+  <p class="lead disp">{{dp_lead}}</p>
+  <h3>{{jd_h3_styles}}</h3>
+  <div class="row"><div class="tag">Regular</div><div class="disp" style="font-size:28pt;line-height:1.25">{{ko_slow_books}}, Slow Books</div></div>
+  <div class="row"><div class="tag">Italic</div><div class="disp" style="font-size:28pt;line-height:1.25;font-style:italic">A Quiet Morning · {{ko_quiet_morning}}</div></div>
+  <div class="row"><div class="tag">Bold</div><div class="disp" style="font-size:28pt;line-height:1.25;font-weight:700">{{ko_season_books}}, Season of Books</div></div>
+  <div class="row"><div class="tag">Bold Italic</div><div class="disp" style="font-size:28pt;line-height:1.25;font-weight:700;font-style:italic">Notes &amp; {{ko_memo}} 2026</div></div>
+  <h3>{{dp_h3_pair}}</h3>
+  <div style="border-left:.8mm solid var(--accent);padding-left:6mm">
+    <div class="disp" style="font-size:30pt;line-height:1.2;font-weight:700">{{dp_pair_title}}</div>
+    <div class="disp" style="font-size:15pt;font-style:italic;color:var(--muted);margin:1mm 0 4mm">The harbor in the fog</div>
+    <p style="font-size:11.5pt;line-height:1.8">{{dp_pair_body}} The harbor was quiet that morning.</p>
+  </div>
+  <h3>{{dp_h3_align}}</h3>
+  <div class="disp" style="font-size:78pt;line-height:1.15;white-space:nowrap">Hxg 가한글 xHp</div>
+  <p class="small">{{dp_note}}</p>
+  <div class="foot"><span>03 Jeongdok Display</span><span>Newsreader opsz 72 + Maru Buri · OFL</span></div>
+</section>
+
+<!-- 5 · Sans -->
+<section class="page sans">
+  <div class="kicker">{{sp_kicker}}</div>
+  <h2 class="sans" style="font-weight:700;font-size:26pt">{{sp_h2}} · Settings</h2>
+  <p class="lead sans" style="font-size:12pt">{{sp_lead}}</p>
+  <h3>{{sp_h3_controls}}</h3>
+  <p><span class="btn">{{btn_save}}</span><span class="btn ghost">{{btn_cancel}}</span><span class="btn" style="background:var(--accent)">{{btn_delete}}</span></p>
+  <div class="cols" style="margin-top:2mm">
+    <div class="cell"><b>{{sp_c1_b}}</b><span>{{sp_c1_s}}</span></div>
+    <div class="cell"><b>{{sp_c2_b}}</b><span>{{sp_c2_s}}</span></div>
+  </div>
+  <h3>{{sp_h3_table}}</h3>
+  <table>
+    <tr><th>{{th_package}}</th><th>{{th_styles}}</th><th class="n">woff2 (Regular)</th><th class="n">{{th_glyphs}}</th></tr>
+    <tr><td>Jeongdok</td><td>4</td><td class="n" style="font-variant-numeric:tabular-nums">516 KB</td><td class="n">12,111</td></tr>
+    <tr><td>Jeongdok Display</td><td>4</td><td class="n" style="font-variant-numeric:tabular-nums">541 KB</td><td class="n">11,906</td></tr>
+    <tr><td>D2Koding</td><td>2</td><td class="n" style="font-variant-numeric:tabular-nums">1,185 KB</td><td class="n">18,898</td></tr>
+    <tr><td>IBM Plex Sans KR</td><td>7</td><td class="n">(Google Fonts)</td><td class="n">—</td></tr>
+  </table>
+  <h3>{{sp_h3_weights}}</h3>
+  <div class="row"><div class="tag">400</div><div style="font-size:14pt;font-weight:400">{{quiet_reading}} Reading time 12:45</div></div>
+  <div class="row"><div class="tag">500</div><div style="font-size:14pt;font-weight:500">{{quiet_reading}} Reading time 12:45</div></div>
+  <div class="row"><div class="tag">700</div><div style="font-size:14pt;font-weight:700">{{quiet_reading}} Reading time 12:45</div></div>
+  <h3>{{sp_h3_sizes}}</h3>
+  <div class="row"><div class="tag">11 px</div><div style="font-size:8.2pt">{{sp_size_1}} 2026.10.09 — {{sp_price}} · 3 items</div></div>
+  <div class="row"><div class="tag">14 px</div><div style="font-size:10.5pt">{{sp_size_2}} 2026.10.09 — {{sp_price}} · 3 items</div></div>
+  <div class="row"><div class="tag">20 px</div><div style="font-size:15pt">{{sp_size_3}} — {{sp_price}}</div></div>
+  <div class="foot"><span>04 IBM Plex Sans KR</span><span>fonts.google.com/specimen/IBM+Plex+Sans+KR · OFL</span></div>
+</section>
+
+<!-- 6 · mono -->
+<section class="page">
+  <div class="kicker">{{mp_kicker}}</div>
+  <h2 class="mono" style="font-size:22pt">D2Koding <span style="font-size:.55em;opacity:.6">1.4.0 · ligature · Nerd</span></h2>
+  <p class="lead">{{mp_lead}}</p>
+  <h3>{{mp_h3_code}}</h3>
+<pre><span class="c">// {{mp_comment}}</span>
+<span class="k">fn</span> main() -&gt; Result&lt;(), Error&gt; {
+    <span class="k">let</span> ok = a != b &amp;&amp; c &gt;= d || e == f;   <span class="c">// =&gt; -&gt; &lt;= !== === &lt;&lt; &gt;&gt; |&gt; ::</span>
+    println!(<span class="s">"{{mp_hello}} {}"</span>, 0x1F600);
+    Ok(())
+}</pre>
+  <h3>{{mp_h3_nerd}}</h3>
+  <pre style="font-size:11pt">&#xe0a0; main   &#xf07b; src/   &#xe73c; main.py   &#xe795; zsh   &#xf09b; GitHub   &#xe0b0;&#xe0b2;</pre>
+  <h3>{{mp_h3_ruler}}</h3>
+<pre style="font-size:10.5pt">0123456789012345678901234567890123456789
+abcdefghijabcdefghijabcdefghijabcdefghij
+가나다라마바사아자차가나다라마바사아자차
+a가b나c다d라e마f바g사h아i자j차k</pre>
+  <h3>Regular / Bold</h3>
+  <div class="mono" style="font-size:11pt;line-height:1.7">$ git log --oneline<br><b>$ git log --oneline  # Bold</b></div>
+  <p class="small" style="margin-top:6mm">{{mp_note}}</p>
+  <div class="foot"><span>05 D2Koding</span><span>D2Coding (NAVER) + Nerd Fonts · OFL</span></div>
+</section>
+
+<!-- 7 · article -->
+<section class="page">
+  <div class="kicker">06 · Together</div>
+  <div class="disp" style="font-size:40pt;line-height:1.12;font-weight:700;margin-bottom:2mm">{{tg_title_a}}<br>{{tg_title_b}}</div>
+  <div class="sans" style="font-size:9pt;color:var(--muted);margin-bottom:6mm">{{tg_meta}} <span style="color:var(--accent);font-weight:500">Typography</span></div>
+  <div class="cols" style="grid-template-columns:2fr 1fr;gap:9mm">
+    <div>
+      <p style="font-size:11pt;line-height:1.85">{{tg_p1}} The three numbers decide whether a mixed line reads as one voice.</p>
+      <p style="font-size:11pt;line-height:1.85">{{tg_p2}}</p>
+<pre style="font-size:8.6pt"><span class="k">const</span> font = {
+  body: <span class="s">'Jeongdok'</span>,      <span class="c">// {{tg_c1}}</span>
+  head: <span class="s">'Jeongdok Display'</span>,
+  ui:   <span class="s">'IBM Plex Sans KR'</span>,
+  code: <span class="s">'D2Koding'</span>,        <span class="c">// =&gt; {{tg_c2}}</span>
+};</pre>
+      <p style="font-size:11pt;line-height:1.85;margin-top:3mm">{{tg_p3}}</p>
+    </div>
+    <div class="sans" style="font-size:8.6pt;line-height:1.6;border-left:.3mm solid var(--rule);padding-left:5mm">
+      <div style="font-weight:700;margin-bottom:2mm">{{tg_side_h}}</div>
+      <div style="margin-bottom:3mm"><b>{{tg_s1}}</b><br>Jeongdok Display Bold</div>
+      <div style="margin-bottom:3mm"><b>{{tg_s2}}</b><br>Jeongdok Regular 11pt / 1.85</div>
+      <div style="margin-bottom:3mm"><b>{{tg_s3}}</b><br>IBM Plex Sans KR</div>
+      <div><b>{{tg_s4}}</b><br>D2Koding 8.6pt</div>
+    </div>
+  </div>
+  <div class="foot"><span>06 Together</span><span>{{tg_foot}}</span></div>
+</section>
+
+<!-- 8 · checklist -->
+<section class="page">
+  <div class="kicker">07 · Setup</div>
+  <h2>{{ck_h2}}</h2>
+  <div class="cols" style="margin-top:6mm">
+    <div>
+      <h3 style="margin-top:0">{{ck_h3_decide}}</h3>
+      <p class="small">{{ck_decide}}</p>
+      <h3>{{ck_h3_ko}}</h3>
+      <p class="small">{{ck_ko}}</p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">{{ck_h3_load}}</h3>
+      <p class="small">{{ck_load}}</p>
+      <h3>{{ck_h3_eink}}</h3>
+      <p class="small">{{ck_eink}}</p>
+    </div>
+  </div>
+  <h3>{{ck_h3_review}}</h3>
+  <p class="small">{{ck_review}}</p>
+  <pre style="font-size:8.6pt">uv sync
+uv run scripts/build.py jeongdok
+uv run scripts/qa.py jeongdok</pre>
+  <div class="foot"><span>07 Setup</span><span>docs/TYPOGRAPHY_SETUP.md</span></div>
+</section>
+
+</body>
+</html>
