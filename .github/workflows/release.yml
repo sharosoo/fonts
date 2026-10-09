@@ -1,8 +1,8 @@
 name: Release font
 
 # Tag format: <package>-v<version>, e.g. jeongdok-v0.1.0
-# Web fonts (dist/web) are committed before tagging so jsDelivr serves them from the tag.
-# This workflow builds the e-reader / desktop assets and attaches them to the GitHub Release.
+# This workflow builds every asset, attaches the e-reader / desktop zips to the GitHub Release,
+# and uploads the web fonts (dist/web/static) to https://cdn.sharosoo.com/fonts/<package>/v<version>/.
 on:
   push:
     tags: ["*-v*"]
@@ -28,6 +28,15 @@ jobs:
         run: uv run scripts/build.py "$PKG"
       - name: QA
         run: uv run scripts/qa.py "$PKG"
+      - name: Upload web fonts to cdn.sharosoo.com
+        env:
+          SHAROSOO_CDN_TOKEN: ${{ secrets.SHAROSOO_CDN_TOKEN }}
+        run: |
+          curl -fsSL https://cdn.sharosoo.com/tools/sharosoo-cdn/install.sh | sh
+          export PATH="$HOME/.local/bin:$PATH"
+          sharosoo-cdn put "packages/$PKG/dist/web/static" \
+            --prefix "fonts/$PKG/v${GITHUB_REF_NAME##*-v}" \
+            --cache-control "public, max-age=31536000, immutable"
       - name: Package
         run: uv run scripts/release.py "$PKG"
       - name: Publish release assets

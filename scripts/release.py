@@ -2,11 +2,12 @@
 """Package a built font for release.
 
   python scripts/release.py jeongdok            # zip assets + SHA256SUMS into packages/jeongdok/dist/release
-  python scripts/release.py jeongdok --publish  # also: commit dist/web, tag, push, `gh release create`
+  python scripts/release.py jeongdok --publish  # also: commit, tag, push, `gh release create`
 
 Release model (same idea as naver/nanumfont-style GitHub releases):
   * e-reader / desktop fonts are downloaded from GitHub Release assets (never committed)
-  * web fonts are committed under dist/web so jsDelivr can serve them from the git tag
+  * web fonts are not committed; CI uploads dist/web/static to
+    https://cdn.sharosoo.com/fonts/<package>/v<version>/ when the tag is pushed
 Tag format: <package>-v<version>   e.g. jeongdok-v0.1.0
 """
 import argparse
@@ -72,7 +73,7 @@ def main():
     (out / "SHA256SUMS").write_text("\n".join(sums) + "\n")
 
     tag = f"{a.package}-v{ver}"
-    notes = f"## {name} {ver}\n\nSee packages/{a.package}/CHANGELOG.md. Web fonts: https://cdn.jsdelivr.net/gh/sharosoo/fonts@{tag}/packages/{a.package}/dist/web/static/{name.lower()}-dynamic-subset.css\n"
+    notes = f"## {name} {ver}\n\nSee packages/{a.package}/CHANGELOG.md. Web fonts: https://cdn.sharosoo.com/fonts/{a.package}/v{ver}/{a.package}-dynamic-subset.css\n"
     (out / "NOTES.md").write_text(notes)
     cmds = [
         ["git", "add", f"packages/{a.package}", "scripts", "README.md"],
