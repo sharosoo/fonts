@@ -1,0 +1,49 @@
+# Jeongdok (정독) — build configuration. Read by scripts/build.py.
+
+[family]
+name = "Jeongdok"
+ps_name = "Jeongdok"
+version = "0.1.0"
+url = "https://github.com/sharosoo/fonts"
+styles = ["Regular", "Italic", "Bold", "BoldItalic"]
+copyright = """\
+Newsreader (c) 2020 The Newsreader Project Authors (http://github.com/productiontype/Newsreader)
+Readerly (c) 2026 Nico Verbruggen (https://github.com/nicoverbruggen/readerly)
+Libron (c) 2026 Nico Verbruggen (https://github.com/nicoverbruggen/libron)
+RIDIBatang (c) 2019 RIDI & Sandoll. Font designed by Sandoll Inc.
+Jeongdok (c) 2026 sharosoo (https://github.com/sharosoo/fonts)"""
+
+[latin]
+# Libron v0.24 static TTFs (OFL, Reserved Font Name "Libron" -> this build is renamed)
+pattern = "upstream/libron/Libron-{style}.ttf"
+
+[hangul]
+# RIDIBatang, tracking -5% variant (see upstream/UPSTREAM.md)
+file = "upstream/ridibatang/RIDIBatang-5.otf"
+# Used in every style; bold styles are synthesised by outline offset (em, per side)
+scale = 0.94      # Hangul visual scale relative to the source em
+dy = 0.09         # baseline shift in Libron em (Hangul face centred on cap height region)
+track = 1.0       # advance multiplier on top of the source advance
+ranges = [
+  [0xAC00, 0xD7A3],   # Hangul syllables
+  [0x3131, 0x318E],   # compatibility jamo
+  [0x3000, 0x303F],   # CJK symbols and punctuation
+  [0xFF01, 0xFF5E],   # fullwidth forms
+  [0x2025, 0x2025],
+  [0x203B, 0x203B],
+]
+
+[hangul.embolden]
+Regular = 0.0
+Italic = 0.0
+Bold = 0.0105
+BoldItalic = 0.0105
+
+[web]
+slices = "tools/slices/notoserifkr.css"   # Google Fonts unicode-range slices (Noto Serif KR)
+subset_ksx1001 = true
+
+[cpfont]
+sizes = [12, 14, 16, 18]
+line_percent = 35
+intervals = "reading,hangul"

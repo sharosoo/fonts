@@ -1,0 +1,17 @@
+{
+  "name": "@sharosoo/jeongdok",
+  "version": "0.1.0",
+  "description": "Jeongdok (정독): Libron Latin + RIDIBatang Hangul reading serif for E Ink. Web fonts.",
+  "license": "OFL-1.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharosoo/fonts.git",
+    "directory": "packages/jeongdok"
+  },
+  "files": [
+    "dist/web",
+    "OFL.txt",
+    "CREDITS.md"
+  ],
+  "keywords": ["font", "webfont", "korean", "hangul", "serif", "e-ink", "ebook"]
+}

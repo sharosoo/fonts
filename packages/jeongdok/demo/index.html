@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeongdok 정독 · 웹폰트 데모</title>
+<script>
+  // ?css=dynamic (default) | subset | full
+  const mode = new URLSearchParams(location.search).get('css') || 'dynamic';
+  const file = {dynamic: 'jeongdok-dynamic-subset.css', subset: 'jeongdok-subset.css', full: 'jeongdok.css'}[mode] || 'jeongdok-dynamic-subset.css';
+  document.write('<link rel="stylesheet" href="../dist/web/static/' + file + '">');
+</script>
+<style>
+  :root { --fs: 20px; --lh: 1.75; --bg: #f4f1ea; --fg: #111; }
+  body.dark { --bg: #111; --fg: #ddd; }
+  body.eink { --bg: #e8e6df; --fg: #000; filter: grayscale(1) contrast(1.05); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: 'Jeongdok', serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 20px 80px; }
+  h1 { font-size: 1.5em; margin: 0 0 4px; }
+  .meta { font: 13px/1.5 system-ui, sans-serif; opacity: .7; margin-bottom: 18px; }
+  .bar { font: 14px system-ui, sans-serif; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; padding: 10px 12px; background: rgba(128,128,128,.15); border-radius: 8px; margin-bottom: 20px; position: sticky; top: 0; backdrop-filter: blur(6px); }
+  .bar a, .bar button { font: inherit; color: inherit; border: 1px solid currentColor; background: transparent; border-radius: 6px; padding: 3px 9px; cursor: pointer; text-decoration: none; opacity: .75; }
+  .bar a.on { opacity: 1; background: rgba(128,128,128,.3); font-weight: 600; }
+  .bar input[type=range] { width: 120px; vertical-align: middle; }
+  section { margin: 28px 0; }
+  h2 { font: 600 13px system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase; opacity: .6; margin: 0 0 8px; }
+  .read { font-size: var(--fs); line-height: var(--lh); word-break: keep-all; overflow-wrap: break-word; }
+  .read p { margin: 0 0 1em; text-indent: 1em; }
+  .guide { position: relative; font-size: 72px; line-height: 1.6; white-space: nowrap; overflow: hidden; }
+  .guide span { position: relative; z-index: 1; }
+  .guide i { position: absolute; left: 0; right: 0; height: 0; border-top: 1px solid; z-index: 2; opacity: .8; }
+  .b { font-weight: 700; } .it { font-style: italic; }
+  #log { font: 12px/1.6 ui-monospace, monospace; white-space: pre-wrap; background: rgba(128,128,128,.12); padding: 10px; border-radius: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Jeongdok · 정독</h1>
+  <div class="meta">Libron(라틴) + 리디바탕(한글, 0.94배, 세로 +0.09em) · v0.1.0 prototype</div>
+
+  <div class="bar">
+    <span>CSS:
+      <a href="?css=dynamic" id="m-dynamic">dynamic subset</a>
+      <a href="?css=subset" id="m-subset">subset (KS X 1001)</a>
+      <a href="?css=full" id="m-full">full</a>
+    </span>
+    <label>크기 <input type="range" id="fs" min="12" max="40" value="20"> <b id="fsv">20</b>px</label>
+    <label>줄간격 <input type="range" id="lh" min="12" max="24" value="17"> <b id="lhv">1.7</b></label>
+    <button id="dark">다크</button>
+    <button id="eink">E-ink 느낌(흑백)</button>
+  </div>
+
+  <section>
+    <h2>본문 (Regular / Italic / Bold)</h2>
+    <div class="read">
+      <p>The harbor was quiet that morning. 항구는 그날 아침 조용했고, 안개 속에서 배 한 척이 천천히 들어오고 있었다. 선장은 <span class="it">낡은 지도</span>를 펼쳐 놓고 <span class="b">오래된 항로</span>를 손가락으로 따라갔다.</p>
+      <p>“Reading is a slow craft,” she said. “읽기는 느린 기술이야”라고 그녀는 말했다. 「서울」에서 2026년 10월 9일에 만났다. <span class="it">Italic은 한글에 기울임이 없어서</span> 한글은 똑바로 서 있다.</p>
+      <p>Typography matters: 글자의 굵기와 간격, 그리고 획의 대비가 한 쪽의 회색도를 결정한다. 물, 밥, 꿈, 책, 읽는 시간. <span class="b b it">Bold Italic · 굵은 기울임</span> 도 확인.</p>
+      <p>똘방똘방 뷁 쀼 읊 깎 닭 값 꿰뚫다 — 2,350자 밖의 글자들이다. subset 모드에서는 이 글자들이 fallback 글꼴로 보여야 정상이다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>위아래 정렬 확인 (빨강=baseline, 파랑=x-height, 초록=cap-height)</h2>
+    <div class="guide" id="g"><span>Hxg 가한글 xHp 꿈gx 가H</span></div>
+  </section>
+
+  <section>
+    <h2>이 페이지에서 받은 woff2</h2>
+    <div id="log">측정 중…</div>
+  </section>
+</main>
+<script>
+  const $ = id => document.getElementById(id);
+  $('m-' + mode).classList.add('on');
+  const root = document.documentElement;
+  $('fs').oninput = e => { root.style.setProperty('--fs', e.target.value + 'px'); $('fsv').textContent = e.target.value; };
+  $('lh').oninput = e => { const v = e.target.value / 10; root.style.setProperty('--lh', v); $('lhv').textContent = v.toFixed(1); };
+  $('dark').onclick = () => document.body.classList.toggle('dark');
+  $('eink').onclick = () => document.body.classList.toggle('eink');
+
+  // guide lines: baseline / x-height / cap-height (Libron: x=0.531em, cap=0.698em)
+  const g = $('g'); const span = g.firstElementChild;
+  function place() {
+    g.querySelectorAll('i').forEach(n => n.remove());
+    const fs = parseFloat(getComputedStyle(g).fontSize);
+    const probe = document.createElement('span'); probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline';
+    span.appendChild(probe);
+    const base = probe.getBoundingClientRect().top - g.getBoundingClientRect().top;
+    probe.remove();
+    [[0, 'red'], [0.531, 'blue'], [0.698, 'green']].forEach(([h, c]) => {
+      const i = document.createElement('i'); i.style.top = (base - h * fs) + 'px'; i.style.borderColor = c; g.appendChild(i);
+    });
+  }
+  document.fonts.ready.then(place); addEventListener('resize', place);
+
+  // which woff2 files were actually downloaded
+  function report() {
+    const rs = performance.getEntriesByType('resource').filter(r => r.name.endsWith('.woff2'));
+    let total = 0;
+    const lines = rs.map(r => { const sz = r.encodedBodySize || r.transferSize || 0; total += sz; return (sz / 1024).toFixed(1).padStart(7) + ' KB  ' + r.name.split('/').pop(); });
+    $('log').textContent = '모드: ' + mode + '\n' + rs.length + '개 파일, 합계 ' + (total / 1024).toFixed(0) + ' KB\n\n' + lines.join('\n');
+  }
+  document.fonts.ready.then(() => setTimeout(report, 400));
+</script>
+</body>
+</html>
