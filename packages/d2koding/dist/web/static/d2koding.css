@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'D2Koding';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./woff2/D2Koding-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'D2Koding';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./woff2/D2Koding-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'D2Koding';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./woff2/D2Koding-NerdSymbols.woff2') format('woff2');
+  unicode-range: U+E000-F8FF;
+}
+@font-face {
+  font-family: 'D2Koding';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./woff2/D2Koding-NerdSymbols.woff2') format('woff2');
+  unicode-range: U+E000-F8FF;
+}
+@font-face {
+  font-family: 'D2Koding';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./woff2/D2Koding-NerdSymbolsMaterial.woff2') format('woff2');
+  unicode-range: U+F0000-FFFFD;
+}
+@font-face {
+  font-family: 'D2Koding';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./woff2/D2Koding-NerdSymbolsMaterial.woff2') format('woff2');
+  unicode-range: U+F0000-FFFFD;
+}

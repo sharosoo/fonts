@@ -1,0 +1,41 @@
+# D2Koding — D2Coding + Nerd Fonts glyphs (patched), ligature and plain builds.
+# "D2Coding" is a Reserved Font Name (NAVER). Modified versions are renamed, same as Nerd Fonts does ("D2Koding").
+kind = "nerd-patch"
+
+[family]
+name = "D2Koding"
+ps_name = "D2Koding"
+version = "1.4.0"
+url = "https://github.com/sharosoo/fonts"
+copyright = """\
+Copyright (c) 2015, NAVER Corporation (https://www.navercorp.com), D2Coding (https://github.com/naver/d2codingfont)
+Nerd Fonts glyph sets (https://github.com/ryanoasis/nerd-fonts), patched by font-patcher v3.5.1
+D2Koding (c) 2026 sharosoo (https://github.com/sharosoo/fonts)"""
+
+[upstream]
+zip_url = "https://github.com/naver/d2codingfont/releases/download/VER1.4.0/D2Coding-Ver1.4.0-20261003.zip"
+zip_sha256 = "17e2da5e2879006eb725b87943f7988736ef8b6c9f8b84bc8e3bdbcb8dd46744"
+
+[upstream.files]
+regular = "D2Coding/D2Coding-Ver1.4.0-20261003.ttf"
+bold = "D2Coding/D2CodingBold-Ver1.4.0-20261003.ttf"
+lig_regular = "D2CodingLigature/D2Coding-Ver1.4.0-20261003-ligature.ttf"
+lig_bold = "D2CodingLigature/D2CodingBold-Ver1.4.0-20261003-ligature.ttf"
+
+[nerd]
+version = "v3.5.1"
+patcher_url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/FontPatcher.zip"
+patcher_sha256 = "42bcb32145499a35732274c7fc48deb434ad0d2e0e118f98527c1479c6fa251a"
+image = "ghcr.io/nicoverbruggen/fntbld-oci:latest"   # has FontForge + python bindings
+
+[nerd.variants]
+# default: icons may overhang 2 cells (Nerd Font); mono: icons squeezed into 1 cell (Nerd Font Mono, for terminals).
+# NOT "--mono": it forces every glyph to 1 cell and would shrink the Hangul advance from 1000 to 500 (overlapping text).
+default = []
+mono = ["--single-width-glyphs"]
+
+[web]
+slices = "tools/slices/notoserifkr.css"
+regular = "lig_regular"      # the ligature build is a superset; plain text = font-variant-ligatures: none
+bold = "lig_bold"
+symbols_from = "D2KodingLigatureNerdFontMono-Regular.ttf"

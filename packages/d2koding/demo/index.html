@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D2Koding · 웹폰트 데모</title>
+<script>
+  const mode = new URLSearchParams(location.search).get('css') || 'dynamic';
+  const file = mode === 'full' ? 'd2koding.css' : 'd2koding-dynamic-subset.css';
+  document.write('<link rel="stylesheet" href="../dist/web/static/' + file + '">');
+</script>
+<style>
+  :root { --fs: 16px; --bg: #1e1f24; --fg: #d7dae0; }
+  body.light { --bg: #fafafa; --fg: #1f2328; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.6 system-ui, sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 24px 20px 80px; }
+  h1 { font-size: 1.4em; margin: 0 0 4px; } h2 { font-size: 12px; letter-spacing: .05em; text-transform: uppercase; opacity: .6; margin: 26px 0 8px; }
+  .meta { opacity: .7; font-size: 13px; margin-bottom: 14px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 8px 12px; background: rgba(128,128,128,.18); border-radius: 8px; font-size: 14px; }
+  .bar a, .bar button, .bar label { color: inherit; }
+  .bar a, .bar button { border: 1px solid currentColor; background: transparent; border-radius: 6px; padding: 3px 9px; cursor: pointer; text-decoration: none; opacity: .75; font: inherit; }
+  .bar a.on { opacity: 1; background: rgba(128,128,128,.3); font-weight: 600; }
+  pre, .mono { font-family: 'D2Koding', monospace; font-size: var(--fs); line-height: 1.55; margin: 0; background: rgba(128,128,128,.12); padding: 14px 16px; border-radius: 8px; overflow-x: auto; tab-size: 4; }
+  body.noliga .mono, body.noliga pre { font-variant-ligatures: none; }
+  .ruler { font-family: 'D2Koding', monospace; font-size: var(--fs); white-space: pre; line-height: 1.4; }
+  #log { font: 12px/1.6 ui-monospace, monospace; white-space: pre-wrap; background: rgba(128,128,128,.12); padding: 10px; border-radius: 6px; }
+  .b { font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <h1>D2Koding</h1>
+  <div class="meta">D2Coding 1.4.0 + Nerd Fonts 3.5.1 · 리가처 빌드 · 임시 이름(원본 Reserved Font Name 때문에 개명)</div>
+  <div class="bar">
+    <span>CSS:
+      <a href="?css=dynamic" id="m-dynamic">dynamic subset</a>
+      <a href="?css=full" id="m-full">full</a>
+    </span>
+    <label>크기 <input type="range" id="fs" min="11" max="28" value="16"> <b id="fsv">16</b>px</label>
+    <button id="lig">리가처 끄기/켜기</button>
+    <button id="theme">밝게/어둡게</button>
+  </div>
+
+  <h2>코드 (한글 주석 · 리가처 · 굵게)</h2>
+<pre id="code">// 한글 주석도 2칸 폭으로 정렬돼야 한다
+fn main() -> Result&lt;(), Error&gt; {
+    let ok = a != b &amp;&amp; c &gt;= d || e == f;   // =&gt; -&gt; &lt;= !== === &lt;&lt; &gt;&gt; |&gt; ::
+    println!("안녕하세요, 세계! {}", 0x1F600);
+    Ok(())
+}
+<span class="b">$ git log --oneline    # Bold 확인</span></pre>
+
+  <h2>Nerd 아이콘 (PUA, 필요할 때만 로드)</h2>
+  <div class="mono">&#xe0a0; main &nbsp; &#xf07b; src/ &nbsp; &#xe73c; main.py &nbsp; &#xe795; zsh &nbsp; &#xf09b; GitHub &nbsp; &#xeb00; &#xf0001; &#xf02a2; &#xe0b0;&#xe0b2;</div>
+
+  <h2>폭 정렬 (영문 1칸 · 한글 2칸)</h2>
+  <div class="mono ruler">0123456789012345678901234567890123456789
+abcdefghijabcdefghijabcdefghijabcdefghij
+가나다라마바사아자차가나다라마바사아자차
+a가b나c다d라e마f바g사h아i자j차k</div>
+
+  <h2>이 페이지에서 받은 woff2</h2>
+  <div id="log">측정 중…</div>
+</main>
+<script>
+  const $ = id => document.getElementById(id);
+  $('m-' + mode).classList.add('on');
+  $('fs').oninput = e => { document.documentElement.style.setProperty('--fs', e.target.value + 'px'); $('fsv').textContent = e.target.value; };
+  $('lig').onclick = () => document.body.classList.toggle('noliga');
+  $('theme').onclick = () => document.body.classList.toggle('light');
+  function report() {
+    const rs = performance.getEntriesByType('resource').filter(r => r.name.endsWith('.woff2'));
+    let total = 0;
+    const lines = rs.map(r => { const sz = r.encodedBodySize || r.transferSize || 0; total += sz; return (sz / 1024).toFixed(1).padStart(7) + ' KB  ' + r.name.split('/').pop(); });
+    $('log').textContent = '모드: ' + mode + '\n' + rs.length + '개 파일, 합계 ' + (total / 1024).toFixed(0) + ' KB\n\n' + lines.join('\n');
+  }
+  document.fonts.ready.then(() => setTimeout(report, 400));
+</script>
+</body>
+</html>

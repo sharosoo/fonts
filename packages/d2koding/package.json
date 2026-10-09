@@ -1,0 +1,9 @@
+{
+  "name": "@sharosoo/d2koding",
+  "version": "1.4.0",
+  "description": "D2Koding: D2Coding with Nerd Fonts glyphs (ligature and plain). Web fonts.",
+  "license": "OFL-1.1",
+  "repository": { "type": "git", "url": "git+https://github.com/sharosoo/fonts.git", "directory": "packages/d2koding" },
+  "files": ["dist/web", "OFL.txt", "CREDITS.md", "LICENSE-nerd-fonts.txt"],
+  "keywords": ["font", "webfont", "monospace", "coding", "korean", "hangul", "nerd-font", "ligature"]
+}
