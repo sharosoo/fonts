@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Jeongdok Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./woff2-subset/JeongdokDisplay-Regular.subset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Jeongdok Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./woff2-subset/JeongdokDisplay-Italic.subset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Jeongdok Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./woff2-subset/JeongdokDisplay-Bold.subset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Jeongdok Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./woff2-subset/JeongdokDisplay-BoldItalic.subset.woff2') format('woff2');
+}

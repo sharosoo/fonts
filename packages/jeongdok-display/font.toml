@@ -1,0 +1,64 @@
+# Jeongdok Display (정독 디스플레이) — headings / brand cut of Jeongdok.
+# Latin: Newsreader at its Display optical size (opsz 72).  Hangul: Maru Buri (NAVER, AG Typography Institute).
+targets = ["ttf", "web"]   # display face: no e-reader (kf / cpfont) builds
+
+[family]
+name = "Jeongdok Display"
+slug = "jeongdok-display"
+ps_name = "JeongdokDisplay"
+version = "0.1.0"
+styles = ["Regular", "Italic", "Bold", "BoldItalic"]
+url = "https://github.com/sharosoo/fonts"
+copyright = """\
+Newsreader (c) 2020 The Newsreader Project Authors (http://github.com/productiontype/Newsreader)
+Maru Buri (c) NAVER Corp., NAVER Cultural Foundation Corp.; designed by AG Typography Institute
+Jeongdok Display (c) 2026 sharosoo (https://github.com/sharosoo/fonts)"""
+
+[latin]
+# variable masters instantiated at build time; contours are de-overlapped
+[latin.variable]
+roman = "upstream/newsreader/Newsreader[opsz,wght].ttf"
+italic = "upstream/newsreader/Newsreader-Italic[opsz,wght].ttf"
+[latin.axes]
+Regular = { opsz = 72, wght = 400 }
+Italic = { opsz = 72, wght = 400 }
+Bold = { opsz = 72, wght = 700 }
+BoldItalic = { opsz = 72, wght = 700 }
+
+[hangul]
+scale = 0.94
+dy = 0.09
+track = 1.0
+ranges = [[0xAC00, 0xD7A3], [0x3131, 0x318E], [0x3000, 0x303F], [0xFF01, 0xFF5E], [0x2025, 0x2025], [0x203B, 0x203B]]
+[hangul.files]    # Maru Buri has real weights, so no outline offset is needed for Bold
+Regular = "upstream/maruburi/MaruBuri-Regular.ttf"
+Italic = "upstream/maruburi/MaruBuri-Regular.ttf"
+Bold = "upstream/maruburi/MaruBuri-Bold.ttf"
+BoldItalic = "upstream/maruburi/MaruBuri-Bold.ttf"
+[hangul.embolden]
+Regular = 0.0
+Italic = 0.0
+Bold = 0.0
+BoldItalic = 0.0
+
+# NAVER's official Maru Buri release (https://hangeul.naver.com/font/maru), Version 2.000
+[[fetch]]
+url = "https://hangeul.pstatic.net/0/hangeul/2022/zip_v2/maruburi.zip"
+sha256 = "39e3bb6a00b4543563a745195a6a89282c5a1f0f8b71923ff15c1bc7c135fa0c"
+member = "TTF/MaruBuri-Regular.ttf"
+member_sha256 = "254abb4c131316e10a55e04495211f1df8cf68c9f58929375311a41af77c4b9b"
+dest = "upstream/maruburi/MaruBuri-Regular.ttf"
+[[fetch]]
+url = "https://hangeul.pstatic.net/0/hangeul/2022/zip_v2/maruburi.zip"
+sha256 = "39e3bb6a00b4543563a745195a6a89282c5a1f0f8b71923ff15c1bc7c135fa0c"
+member = "TTF/MaruBuri-Bold.ttf"
+member_sha256 = "092cb186de18d49adb55721257a63b33f0c9eebb3c7d495336082c3f1e7bdc0d"
+dest = "upstream/maruburi/MaruBuri-Bold.ttf"
+
+[web]
+slices = "tools/slices/notoserifkr.css"
+subset_ksx1001 = true
+
+[qa]
+# names that must not survive in the name table (copyright id 0 is exempt)
+banned = ["Newsreader", "Maru", "마루", "Libron", "Readerly", "RIDI"]

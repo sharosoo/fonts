@@ -1,0 +1,9 @@
+{
+  "name": "@sharosoo/jeongdok-display",
+  "version": "0.1.0",
+  "description": "Jeongdok Display (정독 디스플레이): Newsreader Display Latin + Maru Buri Hangul, heading / brand cut. Web fonts.",
+  "license": "OFL-1.1",
+  "repository": { "type": "git", "url": "git+https://github.com/sharosoo/fonts.git", "directory": "packages/jeongdok-display" },
+  "files": ["dist/web", "OFL.txt", "CREDITS.md"],
+  "keywords": ["font", "webfont", "korean", "hangul", "serif", "display", "headline"]
+}
