@@ -1,0 +1,7 @@
+{
+  "name": "sharosoo-fonts",
+  "private": true,
+  "license": "MIT",
+  "repository": "https://github.com/sharosoo/fonts",
+  "workspaces": ["packages/*"]
+}

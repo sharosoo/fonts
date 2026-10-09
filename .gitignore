@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+tools/vendor/
+node_modules/
+# Binaries for e-readers are shipped as GitHub Release assets, not committed.
+packages/*/dist/eink/
+packages/*/dist/release/
+# Web fonts (packages/*/dist/web) ARE committed so jsDelivr can serve them by tag.
+packages/*/upstream/cache/
+packages/*/upstream/maruburi/
